@@ -80,7 +80,7 @@ export default new Vuex.Store({
     getOneCallData({ commit }, data) {
       // 引数から緯度・経度、環境変数からAPPIDを取得
       // 単位はメートル、言語は日本語
-      OneCall.get(data.location.lat, data.location.lon, process.env.VUE_APP_OPEN_WEATHER_APP_ID, "metric", "ja")
+      OneCall.get(data.lat, data.lon, process.env.VUE_APP_OPEN_WEATHER_APP_ID, "metric", "ja")
       .then((response) => {
           console.log("getOneCall Response", response.data);
           commit("setOneCallData", response.data);

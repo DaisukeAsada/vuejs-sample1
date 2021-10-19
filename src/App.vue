@@ -12,7 +12,7 @@
 
     <v-main>
       <!--都市を選択するヘッダコンポーネント-->
-      <location-header />
+      <location-header :location-items="locationList" @updated="getOneCallData($event)" />
       <!--コンポーネントが変わる時に、アニメーションを行う-->
       <transition name="fade" mode="out-in">
         <!--VueRouterでルーティング設定したコンポーネントを表示する-->
@@ -31,6 +31,28 @@ export default {
      * 地点を選択するコンポーネント
      */
     LocationHeader,
+  },
+  data() {
+    return {
+      /**
+       * プルダウンの内容
+       */
+      locationList :[
+          { text: "東京", value: { lat: 35.68944, lon: 139.69167, }, },
+          { text: "名古屋", value: { lat: 35.18028, lon: 136.90667, }, },
+          { text: "大阪", value: { lat: 34.68639, lon: 135.52, }, },
+          { text: "福岡", value: { lat: 33.60639, lon: 130.41806, }, },
+      ],
+    }
+  },
+  methods: {
+    /**
+     * 気象情報APIの呼び出し
+     */
+    getOneCallData(event) {
+        // storeに定義されたactionを呼び出す
+        this.$store.dispatch("getOneCallData", event);
+    },
   }
 };
 </script>
